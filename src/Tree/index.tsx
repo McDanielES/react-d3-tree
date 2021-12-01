@@ -1,5 +1,5 @@
 import React, { SyntheticEvent } from 'react';
-import { tree as d3tree, hierarchy, HierarchyPointNode } from 'd3-hierarchy';
+import { tree as d3tree, hierarchy, HierarchyPointNode, HierarchyPointLink } from 'd3-hierarchy';
 import { select, event } from 'd3-selection';
 import { zoom as d3zoom, zoomIdentity } from 'd3-zoom';
 import { dequal as deepEqual } from 'dequal/lite';
@@ -378,7 +378,10 @@ class Tree extends React.Component<TreeProps, TreeState> {
    * Restricts tree depth to `props.initialDepth` if defined and if this is
    * the initial render of the tree.
    */
-  generateTree() {
+  generateTree(): {
+    nodes: HierarchyPointNode<TreeNodeDatum>[];
+    links: HierarchyPointLink<TreeNodeDatum>[];
+  } {
     const { initialDepth, depthFactor, separation, nodeSize, orientation } = this.props;
     const { isInitialRenderForDataset } = this.state;
     const tree = d3tree<TreeNodeDatum>()

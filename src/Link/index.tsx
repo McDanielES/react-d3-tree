@@ -123,6 +123,8 @@ export default class Link extends React.PureComponent<LinkProps, LinkState> {
   getClassNames() {
     const { linkData, orientation, pathClassFunc } = this.props;
     const classNames = ['rd3t-link'];
+    if (linkData.target.data.attributes?.disjoint)
+      classNames.push('disconnected-link');
 
     if (typeof pathClassFunc === 'function') {
       classNames.push(pathClassFunc(linkData, orientation));

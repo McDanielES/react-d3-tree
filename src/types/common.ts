@@ -12,6 +12,7 @@ export interface RawNodeDatum {
   name: string;
   attributes?: Record<string, string | number | boolean>;
   children?: RawNodeDatum[];
+  disconnected?: boolean;
 }
 
 export interface TreeNodeDatum extends RawNodeDatum {
